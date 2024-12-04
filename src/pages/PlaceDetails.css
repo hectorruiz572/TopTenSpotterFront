@@ -1,0 +1,55 @@
+.place-details-container {
+  width: 80%;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #f4f4f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.place-details-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.place-name {
+  font-size: 2.5rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.place-details-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.place-image-container {
+  width: 100%;
+  max-width: 600px;
+  margin-bottom: 2rem;
+}
+
+.place-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.place-description {
+  max-width: 800px;
+  text-align: center;
+}
+
+.place-description-title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.place-description p {
+  font-size: 1.2rem;
+  color: #666;
+  line-height: 1.5;
+}

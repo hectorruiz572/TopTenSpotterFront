@@ -1,0 +1,171 @@
+/* General Navbar styles */
+.navbar-container {
+  background-color: #ffffff;
+  /* Fondo oscuro para la barra de navegación */
+  padding: 10px 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left .logo {
+  width: 120px;
+  /* Ajusta el tamaño de tu logo */
+}
+
+.navbar-right {
+  display: flex;
+  gap: 20px;
+  /* Espacio entre los botones */
+}
+
+.navbar-button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #ffffff;
+  transition: background-color 0.3s;
+}
+
+/* Botón de Login */
+.navbar-button.login {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+
+.navbar-button.register {
+  background-color: #4a90e2;
+  color: #ffffff;
+}
+
+.navbar-button.login:hover {
+  background-color: #0056b3;
+  /* Azul más oscuro */
+}
+
+.navbar-button.register:hover {
+  background-color: #218838;
+  /* Verde más oscuro */
+}
+
+/* Botón de Logout */
+.navbar-button.logout {
+  background-color: #dc3545;
+  /* Rojo */
+}
+
+.navbar-button.logout:hover {
+  background-color: #c82333;
+  /* Rojo más oscuro */
+}
+
+/* Popup styles */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  /* Asegura que el overlay esté por encima de otros elementos */
+}
+
+.popup {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  z-index: 1001;
+  /* Asegura que el popup esté por encima del overlay */
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.input-field {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.input-field:focus {
+  border-color: #343a40;
+  outline: none;
+}
+
+.error-message {
+  color: #dc3545;
+  /* Rojo para errores */
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.close-button,
+.submit-button {
+  padding: 10px 20px;
+  border-radius: 4px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.close-button {
+  background-color: #6c757d;
+  /* Gris */
+  color: #ffffff;
+}
+
+.close-button:hover {
+  background-color: #5a6268;
+}
+
+.submit-button {
+  background-color: #007bff;
+  /* Azul */
+  color: #ffffff;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
+/* Contenedor de la parte del perfil y el botón Logout */
+.profile {
+  display: flex;
+  /* Usamos flexbox para alinear los elementos horizontalmente */
+  align-items: center;
+  /* Alineamos verticalmente los elementos al centro */
+  gap: 10px;
+  /* Espacio entre la imagen y el botón */
+}
+
+/* Estilo para la imagen de perfil */
+.profile-image {
+  width: 40px;
+  /* Tamaño de la imagen */
+  height: 40px;
+  /* Mantiene la imagen cuadrada */
+  object-fit: cover;
+  /* Recorta la imagen si es necesario */
+  border-radius: 50%;
+  /* Bordes redondeados */
+}
