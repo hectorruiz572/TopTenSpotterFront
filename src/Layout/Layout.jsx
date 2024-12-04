@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { login, registerUser } from "../services/api";
 import perfil from "../assets/perfil.png";
@@ -11,34 +11,26 @@ import "./Layout.css";
 const Layout = () => {
   const [userLogin, setUserLogin] = useState({});
   const [userRegister, setUserRegister] = useState({});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
 
-  const { setUser } = useUserContext();
-  const { showPopup, formType, triggerPopup, closePopup } = usePopupContext(); // Aquí usamos el PopupContext
-
-  useEffect(() => {
-    const storedIsLoggedIn = localStorage.getItem("isLoggedIn");
-    if (storedIsLoggedIn === "true") {
-      setIsLoggedIn(true);
-    }
-  }, []);
+  const { user, login: loginUser, logout } = useUserContext(); // Accedemos al user context
+  const { showPopup, formType, triggerPopup, closePopup } = usePopupContext();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const user = await login({
+      const userResponse = await login({
         username: userLogin.username,
         password: userLogin.password,
       });
-      if (user && user.id && user.token) {
-        setUser(user);
-        localStorage.setItem("isLoggedIn", "true");
-        localStorage.setItem("userId", user.id);
-        localStorage.setItem("token", user.token);
-        setIsLoggedIn(true);
+
+      if (userResponse && userResponse.id && userResponse.token) {
+        loginUser(userResponse); // Usamos el login del context
+        console.log(userResponse);
+        setErrorMessage(""); // Limpiar mensaje de error
         closePopup();
+        // No recargamos la página, React se encargará de actualizar el estado
       } else {
         setErrorMessage("Usuario o contraseña incorrectos.");
       }
@@ -62,11 +54,7 @@ const Layout = () => {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("userId");
-    localStorage.removeItem("token");
-    setIsLoggedIn(false);
-    setUser(null);
+    logout(); // Usamos el logout del context
     navigate("/");
   };
 
@@ -80,7 +68,7 @@ const Layout = () => {
             </a>
           </div>
           <div className="navbar-right">
-            {!isLoggedIn ? (
+            {!user ? (
               <>
                 <button
                   className="navbar-button login"

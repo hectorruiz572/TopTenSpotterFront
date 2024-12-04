@@ -1,0 +1,23 @@
+.rating {
+  display: inline-flex;
+  direction: row;
+}
+
+.star {
+  font-size: 2rem;
+  color: #e2e8f0;
+  /* Color de las estrellas vacías */
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.star.filled {
+  color: #ffc107;
+  /* Color de las estrellas llenas */
+}
+
+.star.disabled {
+  cursor: not-allowed;
+  color: #e2e8f0;
+  /* Establecer color opaco si está deshabilitado */
+}

@@ -108,3 +108,49 @@ export const getPlaceByName = async (name) => {
         console.error("Get place by name error", error);
     }
 };
+
+export const getAverageRatingByPlace = async (placeName) => {
+    try {
+        
+        const response = await i.get(`/api/places/${placeName}`);
+        
+        return response.data;
+    } catch (error) {
+        console.error("Get average rating by place error", error);
+    }   
+}
+
+// Función para obtener la valoración de un usuario para un lugar específico
+export const getRatingByUserAndPlace = async (placeId) => {
+    try {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setAuth(token);  // Configura el token en los encabezados de axios
+        }
+        
+        // Asegúrate de que la URL sea correcta
+        const response = await i.get(`/api/ratings/user/${placeId}`);
+        
+        return response.data;  // Devuelve la valoración obtenida
+    } catch (error) {
+        console.error("Get rating by user and place error", error);
+        return null;  // Devuelve null en caso de error
+    }
+};
+
+
+// Función para establecer (guardar o actualizar) la valoración de un usuario para un lugar
+export const setRatingPlace = async (placeId, rating) => {
+    try {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setAuth(token);  // Configura el token en los encabezados de axios
+        }
+
+
+        const response = await i.post(`/api/ratings/rate/${placeId}/${rating}`);
+        return response.data;
+    } catch (error) {
+        console.error("Set rating place error", error);
+    }
+};

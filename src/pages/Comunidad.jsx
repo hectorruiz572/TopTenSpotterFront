@@ -3,8 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   getAutonomyByName,
   getPlacesByAutonomyAndCategory,
+  getAverageRatingByPlace,
 } from "../services/api";
 import "./Comunidad.css";
+import StarRating from "../components/StarRating"; // Asegúrate de que este componente exista
 
 const Comunidad = () => {
   const { comunidad } = useParams();
@@ -37,6 +39,19 @@ const Comunidad = () => {
       fetchPlaces();
     }
   }, [comunidadData, selectedButton]);
+
+  useEffect(() => {
+    const fetchRatings = async () => {
+      const ratingsData = {};
+      for (const place of places) {
+        const rating = await getAverageRatingByPlace(place.placeName);
+        ratingsData[place.placeName] = rating;
+      }
+    };
+    if (places.length > 0) {
+      fetchRatings();
+    }
+  }, [places]);
 
   const handlePlaceClick = (place) => {
     navigate(`/${comunidadData.name}/${place.placeName}`);
@@ -84,6 +99,11 @@ const Comunidad = () => {
               <div className="place-content">
                 <h3 className="place-name">{place.placeName}</h3>
                 <p className="place-description">{place.description}</p>
+                <StarRating
+                  totalStars={5}
+                  currentRating={place.averageRating}
+                  isHoverEnabled={true} // Habilitar hover
+                />
               </div>
             </div>
           ))
