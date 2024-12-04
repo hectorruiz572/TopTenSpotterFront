@@ -29,7 +29,7 @@ const StarRating = ({
   };
 
   const handleClick = (index) => {
-    const rating = index + 1;
+    const rating = Math.round((index + 1) * 2) / 2; // Redondear a medio punto
     setSelectedRating(rating);
     if (onRatingSelect) {
       onRatingSelect(rating); // Llama al callback con la calificación seleccionada
@@ -38,12 +38,24 @@ const StarRating = ({
 
   const ratingToUse = disabled ? currentRating : selectedRating || hoverRating;
 
+  const getStarClass = (index) => {
+    // Redondear la calificación para las estrellas
+    const starIndex = index + 1;
+    if (ratingToUse >= starIndex) {
+      return "filled";
+    }
+    if (ratingToUse >= starIndex - 0.5) {
+      return "half-filled"; // Media estrella
+    }
+    return "";
+  };
+
   return (
     <div className="rating">
       {Array.from({ length: totalStars }, (_, index) => (
         <span
           key={index}
-          className={`star ${index < ratingToUse ? "filled" : ""}`}
+          className={`star ${getStarClass(index)}`}
           onMouseEnter={() => handleMouseEnter(index)}
           onMouseLeave={handleMouseLeave}
           onClick={() => !disabled && handleClick(index)} // Solo permite hacer clic si no está deshabilitado

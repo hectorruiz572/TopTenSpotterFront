@@ -16,6 +16,12 @@
   /* Color de las estrellas llenas */
 }
 
+.star.half-filled {
+  background: linear-gradient(90deg, #ffc107 50%, #e2e8f0 50%);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
 .star.disabled {
   cursor: not-allowed;
   color: #e2e8f0;
