@@ -3,10 +3,10 @@ import { useParams, useNavigate } from "react-router-dom";
 import {
   getAutonomyByName,
   getPlacesByAutonomyAndCategory,
-  getAverageRatingByPlace,
 } from "../services/api";
 import "./Comunidad.css";
 import StarRating from "../components/StarRating"; // Asegúrate de que este componente exista
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
 const Comunidad = () => {
   const { comunidad } = useParams();
@@ -35,23 +35,11 @@ const Comunidad = () => {
           selectedButton
         );
         setPlaces(placesData || []);
+        console.log(placesData);
       };
       fetchPlaces();
     }
   }, [comunidadData, selectedButton]);
-
-  useEffect(() => {
-    const fetchRatings = async () => {
-      const ratingsData = {};
-      for (const place of places) {
-        const rating = await getAverageRatingByPlace(place.placeName);
-        ratingsData[place.placeName] = rating;
-      }
-    };
-    if (places.length > 0) {
-      fetchRatings();
-    }
-  }, [places]);
 
   const handlePlaceClick = (place) => {
     navigate(`/${comunidadData.name}/${place.placeName}`);
@@ -83,6 +71,7 @@ const Comunidad = () => {
           </button>
         ))}
       </nav>
+
       <div className="places-grid">
         {places && places.length > 0 ? (
           places.map((place, index) => (
@@ -113,6 +102,35 @@ const Comunidad = () => {
           </p>
         )}
       </div>
+
+      {/* Condición para no mostrar el mapa si la categoría es "Comida" */}
+      {places.length > 0 && selectedButton !== "Comida" && (
+        <div
+          className="place-map-container"
+          style={{ height: "400px", width: "100%" }}
+        >
+          <MapContainer
+            center={[
+              comunidadData.latitude || 40.4168,
+              comunidadData.longitude || -3.7034,
+            ]} // Coordenadas predeterminadas
+            zoom={7}
+            style={{ width: "100%", height: "100%", borderRadius: "8px" }}
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            {places.map((place, index) =>
+              place.latitude && place.longitude ? (
+                <Marker
+                  key={index}
+                  position={[place.latitude, place.longitude]}
+                >
+                  <Popup>{place.placeName}</Popup>
+                </Marker>
+              ) : null
+            )}
+          </MapContainer>
+        </div>
+      )}
     </div>
   );
 };

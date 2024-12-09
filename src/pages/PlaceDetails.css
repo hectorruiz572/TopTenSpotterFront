@@ -1,10 +1,11 @@
 .place-details-container {
-  width: 80%;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  background-color: #f4f4f9;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Arial', sans-serif;
 }
 
 .place-details-header {
@@ -14,60 +15,68 @@
 
 .place-name {
   font-size: 2.5rem;
-  color: #333;
   font-weight: bold;
+  color: #2c3e50;
 }
 
 .place-details-body {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 2rem;
+}
+
+.place-media-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .place-image-container {
-  width: 100%;
   max-width: 600px;
-  margin-bottom: 2rem;
+  flex: 1;
 }
 
 .place-image {
   width: 100%;
-  height: auto;
-  border-radius: 8px;
+  height: 400px;
   object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .place-description {
-  max-width: 800px;
-  text-align: center;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 8px;
 }
 
 .place-description-title {
   font-size: 1.8rem;
+  color: #34495e;
   margin-bottom: 1rem;
-  color: #555;
 }
 
 .place-description p {
   font-size: 1.2rem;
-  color: #666;
-  line-height: 1.5;
+  color: #7f8c8d;
+  line-height: 1.6;
 }
 
 .comment-section {
-  width: 100%;
-  max-width: 800px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-top: 2rem;
 }
 
 .comment-input {
   width: 100%;
+  max-width: 600px;
   padding: 0.8rem;
   margin-bottom: 1rem;
   font-size: 1rem;
   border: 1px solid #ccc;
-  border-radius: 4px;
+  border-radius: 5px;
   outline: none;
 }
 
@@ -78,10 +87,10 @@
 .submit-button {
   padding: 0.8rem 2rem;
   background-color: #007bff;
-  color: white;
+  color: #fff;
   border: none;
-  border-radius: 4px;
-  font-size: 1rem;
+  border-radius: 5px;
+  font-size: 1.1rem;
   cursor: pointer;
 }
 
@@ -90,15 +99,15 @@
 }
 
 .place-comments {
-  margin-top: 2rem;
   width: 100%;
   max-width: 800px;
+  margin-top: 2rem;
 }
 
 .place-comments-title {
   font-size: 1.8rem;
+  color: #34495e;
   margin-bottom: 1rem;
-  color: #555;
 }
 
 .place-comments ul {
@@ -107,14 +116,14 @@
 }
 
 .place-comments li {
-  margin-bottom: 1rem;
-  background-color: #f9f9f9;
+  background-color: #ecf0f1;
   padding: 1rem;
-  border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
 }
 
 .place-comments li p {
   font-size: 1.1rem;
-  color: #444;
+  color: #2c3e50;
 }

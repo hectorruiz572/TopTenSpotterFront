@@ -92,12 +92,13 @@ export const getAutonomyByName = async (name) => {
 export const getPlacesByAutonomyAndCategory = async (autonomy, category) => {
     try {
         const response = await i.get(`/api/autonomy/${autonomy}/category/${category}`);
-
+        console.log("Response data:", response.data);  // Log the data to see if latitude and longitude are there
         return response.data;
     } catch (error) {
         console.error("Get places by autonomy and category error", error);
     }
 };
+
 
 export const getPlaceByName = async (name) => {
     try {
