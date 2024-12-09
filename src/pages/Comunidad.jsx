@@ -108,7 +108,9 @@ const Comunidad = () => {
             </div>
           ))
         ) : (
-          <p>No hay lugares disponibles para esta categoría.</p>
+          <p className="no-places">
+            No hay lugares disponibles para esta categoría.
+          </p>
         )}
       </div>
     </div>

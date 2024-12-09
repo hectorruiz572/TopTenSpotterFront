@@ -154,3 +154,27 @@ export const setRatingPlace = async (placeId, rating) => {
         console.error("Set rating place error", error);
     }
 };
+
+export const setCommentPlace = async (placeId, userId, comment) => {
+    try {
+        const token = localStorage.getItem("token");
+        if (token) {
+            setAuth(token);  // Configura el token en los encabezados de axios
+        }
+
+        // Enviar el comentario como parámetro en la URL
+        await i.post(`/api/comments/${placeId}/${userId}?message=${encodeURIComponent(comment)}`);
+    } catch (error) {
+        console.error("Set comment place error", error);
+    }
+}
+
+export const getCommentsByPlace = async (placeId) => {
+    try {
+        const response = await i.get(`/api/comments/place/${placeId}`);
+        return response.data;
+    } catch (error) {
+        console.error("Get comments by place error", error);
+    }
+}
+
