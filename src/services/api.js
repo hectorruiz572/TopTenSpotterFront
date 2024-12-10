@@ -64,20 +64,28 @@ export const getUserById = async (id) => {
 };
 
 
-export const savePerfil = async (user) => {
-    try {
-        // Asegúrate de que el token esté configurado antes de hacer la solicitud
-        const token = localStorage.getItem("token");  // Obtener token del localStorage
-        if (token) {
-            setAuth(token);  // Configura el token en los encabezados de axios
-        }
+// services/api.js
+export const savePerfil = async (formData, userId) => {
+  const token = localStorage.getItem("token");
+  const response = await fetch(`http://localhost:8080/users/${userId}`, {  // Cambia a la URL de tu backend
+    method: 'PUT',
+    headers: {
+      Authorization: `Basic ${token}`,
+    },
+    body: formData,
+  });
 
-        // Realiza la solicitud PUT para guardar el perfil del usuario
-        await i.put(`/users/${user.id}`, user);
-    } catch (error) {
-        console.error("Save user error", error);
-    }
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error("Error al actualizar el perfil:", errorData);
+    throw new Error('Error al actualizar el perfil');
+  }
+  return await response.json();
 };
+
+
+
+
 
 export const getAutonomyByName = async (name) => {
     try {
@@ -178,4 +186,3 @@ export const getCommentsByPlace = async (placeId) => {
         console.error("Get comments by place error", error);
     }
 }
-

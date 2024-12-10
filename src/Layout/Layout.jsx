@@ -1,11 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { login, registerUser } from "../services/api";
 import perfil from "../assets/perfil.png";
 import logo from "../assets/logo.png";
 import { usePopupContext } from "../providers/PopUpProvider";
 import { useUserContext } from "../providers/UserProvider";
+import { getUserById } from "../services/api";
 import "./Layout.css";
 
 const Layout = () => {
@@ -13,9 +14,26 @@ const Layout = () => {
   const [userRegister, setUserRegister] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const navigate = useNavigate();
+  const [userData, setUserData] = useState({});
 
   const { user, login: loginUser, logout } = useUserContext(); // Accedemos al user context
   const { showPopup, formType, triggerPopup, closePopup } = usePopupContext();
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        try {
+          const data = await getUserById(user.id); // Espera la promesa
+          setUserData(data); // Una vez resuelta, actualiza el estado
+          console.log(data); // Muestra los datos obtenidos
+        } catch (error) {
+          console.error("Error al obtener los datos del usuario", error);
+        }
+      }
+    };
+
+    fetchUserData(); // Llama a la función asíncrona
+  }, [user]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -27,6 +45,7 @@ const Layout = () => {
 
       if (userResponse && userResponse.id && userResponse.token) {
         loginUser(userResponse); // Usamos el login del context
+        setUserData(getUserById(userResponse.id));
         console.log(userResponse);
         setErrorMessage(""); // Limpiar mensaje de error
         closePopup();
@@ -86,7 +105,11 @@ const Layout = () => {
             ) : (
               <div className="profile">
                 <a href="/perfil">
-                  <img src={perfil} alt="Perfil" className="profile-image" />
+                  <img
+                    src={`http://localhost:8080/profileimg${userData.photo}`} // Si no hay foto, usa la imagen predeterminada
+                    alt="Perfil"
+                    className="profile-image"
+                  />
                 </a>
                 <button className="navbar-button logout" onClick={handleLogout}>
                   Logout

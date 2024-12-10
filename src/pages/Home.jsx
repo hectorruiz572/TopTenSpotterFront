@@ -6,10 +6,23 @@ import "leaflet/dist/leaflet.css";
 import geojsonData from "../assets/json/es.json";
 import "./Home.css";
 
+const normalizeName = (name) => {
+  return name
+    .toLowerCase()
+    .replace(/ /g, "-")
+    .replace(/á/g, "a")
+    .replace(/é/g, "e")
+    .replace(/í/g, "i")
+    .replace(/ó/g, "o")
+    .replace(/ú/g, "u")
+    .replace(/ñ/g, "n");
+};
+
 const Home = () => {
   const mapRef = useRef();
   const geojsonRef = useRef();
   const navigate = useNavigate();
+
   const onEachFeature = (feature, layer) => {
     if (feature.properties && feature.properties.name) {
       layer.bindTooltip(feature.properties.name, {
@@ -37,9 +50,7 @@ const Home = () => {
       },
       click: () => {
         if (feature.properties && feature.properties.name) {
-          const comunidad = feature.properties.name
-            .toLowerCase()
-            .replace(/ /g, "-");
+          const comunidad = normalizeName(feature.properties.name);
           navigate(`/${comunidad}`);
         }
       },

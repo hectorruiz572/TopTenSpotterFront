@@ -8,6 +8,12 @@ import "./Comunidad.css";
 import StarRating from "../components/StarRating"; // Asegúrate de que este componente exista
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 
+const normalizeName = (name) => {
+  return name
+    .replace(/-/g, " ") // Reemplazar guiones por espacios
+    .replace(/\b\w/g, (char) => char.toUpperCase()); // Capitalizar la primera letra de cada palabra
+};
+
 const Comunidad = () => {
   const { comunidad } = useParams();
   const [comunidadData, setComunidadData] = useState({});
@@ -20,9 +26,15 @@ const Comunidad = () => {
       console.error("El parámetro 'comunidad' no está presente en la URL.");
       return;
     }
+
     const fetchData = async () => {
-      const data = await getAutonomyByName(comunidad);
-      setComunidadData(data);
+      const normalizedComunidad = normalizeName(comunidad);
+      const data = await getAutonomyByName(normalizedComunidad);
+      if (data) {
+        setComunidadData(data);
+      } else {
+        console.error("No se encontró la comunidad autónoma.");
+      }
     };
     fetchData();
   }, [comunidad]);
@@ -42,7 +54,7 @@ const Comunidad = () => {
   }, [comunidadData, selectedButton]);
 
   const handlePlaceClick = (place) => {
-    navigate(`/${comunidadData.name}/${place.placeName}`);
+    navigate(`/${normalizeName(comunidadData.name)}/${place.placeName}`);
   };
 
   const categories = [

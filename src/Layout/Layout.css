@@ -158,14 +158,11 @@ h2 {
   /* Espacio entre la imagen y el botón */
 }
 
-/* Estilo para la imagen de perfil */
 .profile-image {
   width: 40px;
-  /* Tamaño de la imagen */
   height: 40px;
-  /* Mantiene la imagen cuadrada */
-  object-fit: cover;
-  /* Recorta la imagen si es necesario */
   border-radius: 50%;
-  /* Bordes redondeados */
+  /* Si quieres hacer la imagen redonda */
+  object-fit: cover;
+  /* Para asegurarte de que la imagen no se distorsione */
 }
