@@ -17,6 +17,7 @@ const Perfil = () => {
       getUserById(userId, token)
         .then((response) => {
           setUserData(response);
+          console.log(userData);
         })
         .catch((error) => {
           console.error("Error fetching user data", error);
@@ -54,6 +55,7 @@ const Perfil = () => {
       // Aquí debes actualizar el perfil con el FormData
       await savePerfil(formData, userId);
       navigate("/"); // Redirigir después de guardar
+      window.location.reload();
     } catch (error) {
       console.error("Error al guardar el perfil", error);
     }

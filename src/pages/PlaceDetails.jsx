@@ -124,6 +124,7 @@ const PlaceDetails = () => {
           <ul>
             {commentsPlace.map((comment, index) => (
               <li key={index}>
+                {/* TODO: Add profile picture */}
                 <p>
                   <strong>{comment.user.username}</strong>: {comment.mensaje}
                 </p>

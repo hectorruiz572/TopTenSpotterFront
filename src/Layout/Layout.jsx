@@ -1,12 +1,11 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import { login, registerUser } from "../services/api";
+import { login, registerUser, getUserById } from "../services/api";
 import perfil from "../assets/perfil.png";
 import logo from "../assets/logo.png";
 import { usePopupContext } from "../providers/PopUpProvider";
 import { useUserContext } from "../providers/UserProvider";
-import { getUserById } from "../services/api";
 import "./Layout.css";
 
 const Layout = () => {
@@ -16,23 +15,22 @@ const Layout = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({});
 
-  const { user, login: loginUser, logout } = useUserContext(); // Accedemos al user context
+  const { user, login: loginUser, logout } = useUserContext();
   const { showPopup, formType, triggerPopup, closePopup } = usePopupContext();
 
   useEffect(() => {
     const fetchUserData = async () => {
       if (user) {
         try {
-          const data = await getUserById(user.id); // Espera la promesa
-          setUserData(data); // Una vez resuelta, actualiza el estado
-          console.log(data); // Muestra los datos obtenidos
+          const data = await getUserById(user.id);
+          setUserData(data);
         } catch (error) {
-          console.error("Error al obtener los datos del usuario", error);
+          console.error("Error al obtener los datos del usuario:", error);
         }
       }
     };
 
-    fetchUserData(); // Llama a la función asíncrona
+    fetchUserData();
   }, [user]);
 
   const handleLogin = async (e) => {
@@ -44,12 +42,11 @@ const Layout = () => {
       });
 
       if (userResponse && userResponse.id && userResponse.token) {
-        loginUser(userResponse); // Usamos el login del context
-        setUserData(getUserById(userResponse.id));
-        console.log(userResponse);
-        setErrorMessage(""); // Limpiar mensaje de error
+        loginUser(userResponse);
+        const data = await getUserById(userResponse.id);
+        setUserData(data);
+        setErrorMessage("");
         closePopup();
-        // No recargamos la página, React se encargará de actualizar el estado
       } else {
         setErrorMessage("Usuario o contraseña incorrectos.");
       }
@@ -73,7 +70,7 @@ const Layout = () => {
   };
 
   const handleLogout = () => {
-    logout(); // Usamos el logout del context
+    logout();
     navigate("/");
   };
 
@@ -106,7 +103,11 @@ const Layout = () => {
               <div className="profile">
                 <a href="/perfil">
                   <img
-                    src={`http://localhost:8080/profileimg${userData.photo}`} // Si no hay foto, usa la imagen predeterminada
+                    src={
+                      userData.photo
+                        ? `http://localhost:8080/profileimg/${userData.photo}`
+                        : perfil
+                    }
                     alt="Perfil"
                     className="profile-image"
                   />

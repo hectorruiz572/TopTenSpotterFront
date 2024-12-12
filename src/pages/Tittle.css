@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap');
+
+.comunidad-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2.5rem !important;
+  color: #1a365d;
+  text-align: center;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.comunidad-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  transform: translateX(-100%);
+  animation: revealLine 1.5s ease-out forwards;
+}
+
+@keyframes revealLine {
+  to {
+    transform: translateX(0);
+  }
+}

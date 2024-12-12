@@ -2,17 +2,18 @@
 .navbar-container {
   background-color: #ffffff;
   /* Fondo oscuro para la barra de navegación */
-  padding: 10px 20px;
+  padding: 0px 20px;
 }
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: -10px;
 }
 
 .navbar-left .logo {
-  width: 120px;
+  width: 300px;
   /* Ajusta el tamaño de tu logo */
 }
 
@@ -156,6 +157,7 @@ h2 {
   /* Alineamos verticalmente los elementos al centro */
   gap: 10px;
   /* Espacio entre la imagen y el botón */
+  margin-top: -45px;
 }
 
 .profile-image {

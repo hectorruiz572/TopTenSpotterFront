@@ -5,6 +5,7 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import geojsonData from "../assets/json/es.json";
 import "./Home.css";
+import "./Tittle.css";
 
 const normalizeName = (name) => {
   return name
@@ -78,7 +79,9 @@ const Home = () => {
 
   return (
     <div className="home-container">
-      <h1>Mapa de Comunidades Autónomas de España</h1>
+      <h1 className="comunidad-title">
+        Mapa de Comunidades Autónomas de España
+      </h1>
       <MapContainer
         bounds={L.latLngBounds(L.latLng(35.7, -9.3), L.latLng(43.8, 4.3))}
         style={{ height: "80vh", width: "100%" }}

@@ -67,8 +67,8 @@ export const getUserById = async (id) => {
 // services/api.js
 export const savePerfil = async (formData, userId) => {
   const token = localStorage.getItem("token");
-  const response = await fetch(`http://localhost:8080/users/${userId}`, {  // Cambia a la URL de tu backend
-    method: 'PUT',
+  const response = await fetch(`http://localhost:8080/users/${userId}`, {
+    method: "PUT",
     headers: {
       Authorization: `Basic ${token}`,
     },
@@ -78,13 +78,10 @@ export const savePerfil = async (formData, userId) => {
   if (!response.ok) {
     const errorData = await response.json();
     console.error("Error al actualizar el perfil:", errorData);
-    throw new Error('Error al actualizar el perfil');
+    throw new Error("Error al actualizar el perfil");
   }
   return await response.json();
 };
-
-
-
 
 
 export const getAutonomyByName = async (name) => {
