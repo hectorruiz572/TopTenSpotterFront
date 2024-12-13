@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { login, registerUser, getUserById } from "../services/api";
-import perfil from "../assets/perfil.png";
+import iconoPerfil from "../assets/iconoPerfil.png";
 import logo from "../assets/logo.png";
 import { usePopupContext } from "../providers/PopUpProvider";
 import { useUserContext } from "../providers/UserProvider";
@@ -106,7 +106,7 @@ const Layout = () => {
                     src={
                       userData.photo
                         ? `http://localhost:8080/profileimg/${userData.photo}`
-                        : perfil
+                        : iconoPerfil
                     }
                     alt="Perfil"
                     className="profile-image"
