@@ -65,10 +65,37 @@
 .comment-section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-top: 2rem;
 }
 
+/* Nuevos estilos para el encabezado de comentarios */
+.comment-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.comment-main-title {
+  font-size: 2rem;
+  color: #07090c;
+  font-weight: bold;
+  text-decoration: underline;
+  margin-bottom: 1rem;
+}
+
+.comment-description {
+  font-size: 1.2rem;
+  color: #273233;
+  margin: 1auto 2rem auto;
+  line-height: 0.1;
+}
+
+/* Resto de estilos existentes */
 .comment-input {
   width: 100%;
   max-width: 600px;
@@ -82,6 +109,48 @@
 
 .comment-input:focus {
   border-color: #007bff;
+}
+
+.button-group {
+  display: flex;
+  gap: 20px;
+  /* Espacio entre botones */
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.close-button,
+.submit-button {
+  flex: 1;
+  /* Hace que ambos botones ocupen el mismo espacio */
+  min-width: 120px;
+  /* Ancho mínimo para los botones */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none;
+}
+
+.close-button {
+  background-color: #6c757d;
+  /* Color gris para el botón cerrar */
+  color: white;
+}
+
+.submit-button {
+  background-color: #007bff;
+  /* Color azul para el botón submit */
+  color: white;
+}
+
+/* Efectos hover opcionales */
+.close-button:hover {
+  background-color: #5a6268;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
 }
 
 .submit-button {
@@ -98,32 +167,34 @@
   background-color: #0056b3;
 }
 
-.place-comments {
-  width: 100%;
-  max-width: 800px;
-  margin-top: 2rem;
-}
-
-.place-comments-title {
-  font-size: 1.8rem;
-  color: #34495e;
-  margin-bottom: 1rem;
-}
-
-.place-comments ul {
-  list-style-type: none;
+.comments-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  /* Aumentado de 1rem a 2rem para más espacio entre comentarios */
   padding: 0;
+  /* Quita el padding por defecto */
+  margin: 0;
+  /* Quita el margin por defecto */
+  list-style: none;
+  /* Quita las bolitas negras */
 }
 
-.place-comments li {
-  background-color: #ecf0f1;
-  padding: 1rem;
+.comment-item {
+  flex: 1 1 300px;
+  border: 1px solid #e0e0e0;
+  /* Borde más suave */
+  padding: 1.5rem;
+  /* Más padding interior */
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 1rem;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  /* Sombra más pronunciada */
+  transition: box-shadow 0.3s ease;
+  /* Transición suave para efectos hover */
 }
 
-.place-comments li p {
-  font-size: 1.1rem;
-  color: #2c3e50;
+/* Opcional: efecto hover para los comentarios */
+.comment-item:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }

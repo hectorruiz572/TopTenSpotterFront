@@ -1,7 +1,6 @@
 /* General Navbar styles */
 .navbar-container {
   background-color: #ffffff;
-  /* Fondo oscuro para la barra de navegación */
   padding: 0px 20px;
 }
 
@@ -13,14 +12,15 @@
 }
 
 .navbar-left .logo {
-  width: 300px;
+  width: 200px;
   /* Ajusta el tamaño de tu logo */
 }
 
 .navbar-right {
   display: flex;
+  align-items: center;
+  /* Centra verticalmente los elementos */
   gap: 20px;
-  /* Espacio entre los botones */
 }
 
 .navbar-button {
@@ -31,6 +31,9 @@
   font-size: 14px;
   color: #ffffff;
   transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  /* Asegura que los botones se alineen verticalmente */
 }
 
 /* Botón de Login */
@@ -38,7 +41,6 @@
   background-color: #f0f0f0;
   color: #333;
 }
-
 
 .navbar-button.register {
   background-color: #4a90e2;
@@ -78,7 +80,6 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  /* Asegura que el overlay esté por encima de otros elementos */
 }
 
 .popup {
@@ -89,7 +90,6 @@
   width: 100%;
   max-width: 400px;
   z-index: 1001;
-  /* Asegura que el popup esté por encima del overlay */
 }
 
 h2 {
@@ -152,19 +152,15 @@ h2 {
 /* Contenedor de la parte del perfil y el botón Logout */
 .profile {
   display: flex;
-  /* Usamos flexbox para alinear los elementos horizontalmente */
   align-items: center;
-  /* Alineamos verticalmente los elementos al centro */
+  /* Centra la imagen de perfil y el botón logout */
   gap: 10px;
-  /* Espacio entre la imagen y el botón */
-  margin-top: -45px;
 }
 
 .profile-image {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  /* Si quieres hacer la imagen redonda */
   object-fit: cover;
-  /* Para asegurarte de que la imagen no se distorsione */
+  /* Asegura que la imagen no se distorsione */
 }

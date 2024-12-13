@@ -85,7 +85,7 @@ const PlaceDetails = () => {
         <div className="place-media-container">
           <div className="place-image-container">
             <img
-              src={`http://localhost:8080/images/${place.imagePath}`}
+              src={place.imagePath}
               alt={place.name}
               className="place-image"
             />
@@ -105,28 +105,46 @@ const PlaceDetails = () => {
         </div>
 
         {/* Formulario de comentarios */}
-        <div className="comment-section">
-          <input
-            type="text"
-            placeholder="Añadir comentario"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-            className="comment-input"
-          />
-          <button className="submit-button" onClick={handleComment}>
-            Enviar
-          </button>
+        <div className="comment-header">
+          <h2 className="comment-main-title">DÉJANOS SABER TU OPINIÓN </h2>
+          <p className="comment-description">
+            <i>Tu opinión ayuda a mejorar nuestra plataforma.</i>
+          </p>
+          <p className="comment-description">
+            <i>Comparta su experiencia y ayude a otros viajeros!!</i>
+          </p>
         </div>
-
+        <input
+          type="text"
+          placeholder="Escriba su opinión aquí..."
+          value={comment}
+          style={{ marginLeft: "290px" }}
+          onChange={(e) => setComment(e.target.value)}
+          className="comment-input"
+        />
+        <button
+          className="submit-button"
+          style={{ marginLeft: "520px", marginRight: "520px" }}
+          onClick={handleComment}
+        >
+          Enviar
+        </button>
         {/* Lista de comentarios */}
         <div className="place-comments">
-          <h2 className="place-comments-title">Comentarios</h2>
-          <ul>
+          <h2 className="place-comments-title" style={{ marginLeft: "30px" }}>
+            COMENTARIOS:
+          </h2>
+          <ul className="comments-list">
             {commentsPlace.map((comment, index) => (
-              <li key={index}>
-                {/* TODO: Add profile picture */}
+              <li
+                key={index}
+                className="comment-item"
+                style={{ marginLeft: "12px", marginRight: "16px" }}
+              >
                 <p>
-                  <strong>{comment.user.username}</strong>: {comment.mensaje}
+                  <i>
+                    <strong>{comment.user.username}</strong>: {comment.mensaje}
+                  </i>
                 </p>
               </li>
             ))}
@@ -136,5 +154,4 @@ const PlaceDetails = () => {
     </div>
   );
 };
-
 export default PlaceDetails;

@@ -183,3 +183,15 @@ export const getCommentsByPlace = async (placeId) => {
         console.error("Get comments by place error", error);
     }
 }
+
+export const deleteComment = async (commentId) => {
+    try{
+        const token = localStorage.getItem("token");
+        if (token) {
+            setAuth(token);  // Configura el token en los encabezados de axios
+        }
+        await i.delete(`/api/comments/${commentId}`);
+    } catch (error) {
+        console.error("Delete comment error", error);
+    }
+ }
