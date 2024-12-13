@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import StarRating from "../components/StarRating";
-import { getPlaceByName } from "../services/api";
-import { setRatingPlace } from "../services/api";
-import { getRatingByUserAndPlace } from "../services/api";
+import {
+  getPlaceByName,
+  setRatingPlace,
+  getRatingByUserAndPlace,
+  setCommentPlace,
+  getCommentsByPlace,
+  deleteComment,
+} from "../services/api";
 import { useUserContext } from "../providers/UserProvider";
 import { usePopupContext } from "../providers/PopUpProvider";
-import { setCommentPlace } from "../services/api";
-import { getCommentsByPlace } from "../services/api";
+import perfil from "../assets/perfil.png";
 import "./PlaceDetails.css"; // Aquí puedes agregar tu archivo de estilo
 
 const PlaceDetails = () => {
@@ -65,9 +69,25 @@ const PlaceDetails = () => {
     try {
       await setCommentPlace(place.id, userId, comment);
       setComment("");
-      window.location.reload();
+      setCommentsPlace(await getCommentsByPlace(place.id)); // Actualiza comentarios
     } catch (error) {
       console.error("Error al enviar el comentario:", error);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    if (!user) {
+      triggerPopup("login");
+      return;
+    }
+
+    try {
+      await deleteComment(commentId);
+      setCommentsPlace((prevComments) =>
+        prevComments.filter((comment) => comment.id !== commentId)
+      ); // Actualiza la lista de comentarios sin recargar
+    } catch (error) {
+      console.error("Error al eliminar el comentario:", error);
     }
   };
 
@@ -129,6 +149,7 @@ const PlaceDetails = () => {
         >
           Enviar
         </button>
+
         {/* Lista de comentarios */}
         <div className="place-comments">
           <h2 className="place-comments-title" style={{ marginLeft: "30px" }}>
@@ -139,13 +160,37 @@ const PlaceDetails = () => {
               <li
                 key={index}
                 className="comment-item"
-                style={{ marginLeft: "12px", marginRight: "16px" }}
+                style={{
+                  marginLeft: "12px",
+                  marginRight: "16px",
+                  position: "relative",
+                }}
               >
+                {comment.user.id == userId && (
+                  <span
+                    className="delete-cross"
+                    onClick={() => handleDeleteComment(comment.id)}
+                    title="Eliminar comentario"
+                  >
+                    ×
+                  </span>
+                )}
                 <p>
-                  <i>
-                    <strong>{comment.user.username}</strong>: {comment.mensaje}
-                  </i>
+                  <i>{comment.mensaje}</i>
                 </p>
+                {/* Mostrar foto de perfil y nombre del usuario */}
+                <div className="comment-user-info">
+                  <img
+                    src={
+                      comment.user.photo
+                        ? `http://localhost:8080/profileimg/${comment.user.photo}`
+                        : perfil
+                    }
+                    alt={comment.user.username}
+                    className="comment-user-photo"
+                  />
+                  <strong>{comment.user.username}</strong>
+                </div>
               </li>
             ))}
           </ul>
@@ -154,4 +199,5 @@ const PlaceDetails = () => {
     </div>
   );
 };
+
 export default PlaceDetails;
