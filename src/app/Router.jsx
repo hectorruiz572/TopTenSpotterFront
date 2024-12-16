@@ -15,14 +15,7 @@ const Router = () => {
           <Route index element={<Home />} />
 
           {/* Ruta privada, que solo es accesible si el usuario está logueado */}
-          <Route
-            path="/perfil"
-            element={
-              <PrivateRoute>
-                <Perfil />
-              </PrivateRoute>
-            }
-          />
+          <Route path="/perfil" element={<Perfil />} />
 
           <Route path="/:comunidad" element={<Comunidad />} />
           <Route path="/:comunidad/:placeName" element={<PlaceDetails />} />
