@@ -105,7 +105,7 @@ const Layout = () => {
                   <img
                     src={
                       userData.photo
-                        ? `https://toptenspotterbackend.onrender.com/${userData.photo}`
+                        ? `https://toptenspotterbackend.onrender.com/profileimg/${userData.photo}`
                         : iconoPerfil
                     }
                     alt="Perfil"
