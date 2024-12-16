@@ -6,7 +6,6 @@ import iconoPerfil from "../assets/iconoPerfil.png";
 import logo from "../assets/logo.png";
 import { usePopupContext } from "../providers/PopUpProvider";
 import { useUserContext } from "../providers/UserProvider";
-import { Link } from "react-router-dom";
 import "./Layout.css";
 
 const Layout = () => {
@@ -102,7 +101,7 @@ const Layout = () => {
               </>
             ) : (
               <div className="profile">
-                <Link href="/perfil">
+                <a href="/perfil">
                   <img
                     src={
                       userData.photo
@@ -112,7 +111,7 @@ const Layout = () => {
                     alt="Perfil"
                     className="profile-image"
                   />
-                </Link>
+                </a>
                 <button className="navbar-button logout" onClick={handleLogout}>
                   Logout
                 </button>
