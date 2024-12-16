@@ -67,7 +67,7 @@ export const getUserById = async (id) => {
 // services/api.js
 export const savePerfil = async (formData, userId) => {
   const token = localStorage.getItem("token");
-  const response = await fetch(`https://toptenspotterbackend.onrender.com/users/${userId}`, {
+  const response = await fetch(`process.env.API_URL/users/${userId}`, {
     method: "PUT",
     headers: {
       Authorization: `Basic ${token}`,
