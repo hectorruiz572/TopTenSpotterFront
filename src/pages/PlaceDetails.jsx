@@ -183,7 +183,7 @@ const PlaceDetails = () => {
                   <img
                     src={
                       comment.user.photo
-                        ? `http://localhost:8080/profileimg/${comment.user.photo}`
+                        ? `https://toptenspotterbackend.onrender.com/profileimg/${comment.user.photo}`
                         : perfil
                     }
                     alt={comment.user.username}
