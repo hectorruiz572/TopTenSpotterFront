@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const i = axios.create({ baseURL: 'http://localhost:8080' });
+const i = axios.create({ baseURL: 'https://toptenspotterbackend.onrender.com' });
 
 export const login = async (user) => {
     // Verificar que username y password no estén vacíos
