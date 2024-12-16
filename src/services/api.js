@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const i = axios.create({ baseURL: 'process.env.API_URL' });
+const i = axios.create({ baseURL: 'https://toptenspotterbackend.onrender.com' });
 
 export const login = async (user) => {
     // Verificar que username y password no estén vacíos
@@ -67,7 +67,7 @@ export const getUserById = async (id) => {
 // services/api.js
 export const savePerfil = async (formData, userId) => {
   const token = localStorage.getItem("token");
-  const response = await fetch(`process.env.API_URL/users/${userId}`, {
+  const response = await fetch(`https://toptenspotterbackend.onrender.com/users/${userId}`, {
     method: "PUT",
     headers: {
       Authorization: `Basic ${token}`,
