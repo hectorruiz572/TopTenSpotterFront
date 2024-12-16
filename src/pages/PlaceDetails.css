@@ -71,11 +71,16 @@
 .comment-section {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
   margin-top: 2rem;
 }
 
+/* Nuevos estilos para el encabezado de comentarios */
 .comment-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: center;
   margin-bottom: 2rem;
   width: 100%;
@@ -92,10 +97,11 @@
 .comment-description {
   font-size: 1.2rem;
   color: #273233;
-  line-height: 1.6;
+  margin: 1auto 2rem auto;
+  line-height: 0.1;
 }
 
-/* Input de comentarios */
+/* Resto de estilos existentes */
 .comment-input {
   width: 100%;
   max-width: 600px;
@@ -111,15 +117,48 @@
   border-color: #007bff;
 }
 
-/* Grupo de botones */
 .button-group {
   display: flex;
   gap: 20px;
+  /* Espacio entre botones */
   justify-content: center;
   margin-top: 20px;
 }
 
 .close-button,
+.submit-button {
+  flex: 1;
+  /* Hace que ambos botones ocupen el mismo espacio */
+  min-width: 120px;
+  /* Ancho mínimo para los botones */
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  border: none;
+}
+
+.close-button {
+  background-color: #6c757d;
+  /* Color gris para el botón cerrar */
+  color: white;
+}
+
+.submit-button {
+  background-color: #007bff;
+  /* Color azul para el botón submit */
+  color: white;
+}
+
+/* Efectos hover opcionales */
+.close-button:hover {
+  background-color: #5a6268;
+}
+
+.submit-button:hover {
+  background-color: #0056b3;
+}
+
 .submit-button {
   flex: 1;
   min-width: 120px;

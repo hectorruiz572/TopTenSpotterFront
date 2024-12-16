@@ -199,5 +199,4 @@ const PlaceDetails = () => {
     </div>
   );
 };
-
 export default PlaceDetails;

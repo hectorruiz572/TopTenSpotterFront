@@ -130,50 +130,65 @@ const Layout = () => {
             >
               <label>
                 Usuario:
-                <input
-                  type="text"
-                  className="input-field"
-                  placeholder="Ingresa tu usuario"
-                  onChange={(e) =>
-                    formType === "login"
-                      ? setUserLogin({ ...userLogin, username: e.target.value })
-                      : setUserRegister({
-                          ...userRegister,
-                          username: e.target.value,
-                        })
-                  }
-                />
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <input
+                    type="text"
+                    className="input-field"
+                    placeholder="Ingresa tu usuario"
+                    style={{ width: "100%" }}
+                    onChange={(e) =>
+                      formType === "login"
+                        ? setUserLogin({
+                            ...userLogin,
+                            username: e.target.value,
+                          })
+                        : setUserRegister({
+                            ...userRegister,
+                            username: e.target.value,
+                          })
+                    }
+                  />
+                </div>
               </label>
               <label>
                 Contraseña:
-                <input
-                  type="password"
-                  className="input-field"
-                  placeholder="Ingresa tu contraseña"
-                  onChange={(e) =>
-                    formType === "login"
-                      ? setUserLogin({ ...userLogin, password: e.target.value })
-                      : setUserRegister({
-                          ...userRegister,
-                          password: e.target.value,
-                        })
-                  }
-                />
+                <div style={{ display: "flex", justifyContent: "center" }}>
+                  <input
+                    type="password"
+                    className="input-field"
+                    placeholder="Ingresa tu contraseña"
+                    style={{ width: "100%" }}
+                    onChange={(e) =>
+                      formType === "login"
+                        ? setUserLogin({
+                            ...userLogin,
+                            password: e.target.value,
+                          })
+                        : setUserRegister({
+                            ...userRegister,
+                            password: e.target.value,
+                          })
+                    }
+                  />
+                </div>
               </label>
               {formType === "register" && (
                 <label>
                   Confirmar Contraseña:
-                  <input
-                    type="password"
-                    className="input-field"
-                    placeholder="Confirma tu contraseña"
-                    onChange={(e) =>
-                      setUserRegister({
-                        ...userRegister,
-                        confirmPassword: e.target.value,
-                      })
-                    }
-                  />
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <input
+                      type="password"
+                      className="input-field"
+                      placeholder="Confirma tu contraseña"
+                      style={{ width: "100%" }}
+                      onChange={(e) =>
+                        setUserRegister({
+                          ...userRegister,
+                          confirmPassword: e.target.value,
+                        })
+                      }
+                    />
+                  </div>
                 </label>
               )}
               {errorMessage && <p className="error-message">{errorMessage}</p>}
