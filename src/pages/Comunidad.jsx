@@ -7,6 +7,7 @@ import {
 } from "../services/api";
 import StarRating from "../components/StarRating";
 import "./Comunidad.css";
+import "leaflet/dist/leaflet.css";
 
 const CATEGORIES = [
   "Comida",
