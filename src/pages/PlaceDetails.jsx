@@ -10,8 +10,8 @@ import {
   deleteComment,
 } from "../services/api";
 import { useUserContext } from "../providers/UserProvider";
-import { usePopupContext } from "../providers/PopUpProvider";
 import perfil from "../assets/perfil.png";
+import { usePopupContext } from "../providers/PopUpProvider";
 import "./PlaceDetails.css"; // Aquí puedes agregar tu archivo de estilo
 
 const PlaceDetails = () => {
