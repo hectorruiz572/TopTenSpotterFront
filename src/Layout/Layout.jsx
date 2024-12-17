@@ -2,8 +2,8 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { login, registerUser, getUserById } from "../services/api";
-import iconoPerfil from "../assets/iconoPerfil.png";
 import logo from "../assets/logo.png";
+import iconoPerfil from "../assets/iconoPerfil.png";
 import { usePopupContext } from "../providers/PopUpProvider";
 import { useUserContext } from "../providers/UserProvider";
 import "./Layout.css";
