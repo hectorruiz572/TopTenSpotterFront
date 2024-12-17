@@ -64,6 +64,10 @@ const Perfil = () => {
         icon: "success",
         confirmButtonColor: "#4caf50",
         confirmButtonText: "Aceptar",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload(); // Se recarga la página solo si se hace clic en "Aceptar"
+        }
       });
     } catch (error) {
       console.error("Error al guardar el perfil", error);
