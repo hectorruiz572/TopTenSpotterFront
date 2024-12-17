@@ -139,9 +139,6 @@ const Comunidad = () => {
                     <div>
                       <strong>{place.placeName}</strong>
                     </div>
-                    {place.priceLevel && (
-                      <div>Precio: {"$".repeat(place.priceLevel)}</div>
-                    )}
                   </div>
                 </Popup>
               </Marker>
