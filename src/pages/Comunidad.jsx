@@ -9,8 +9,8 @@ import {
   getAutonomyByName,
   getPlacesByAutonomyAndCategory,
 } from "../services/api";
-import StarRating from "../components/StarRating";
 import "./Comunidad.css";
+import StarRating from "../components/StarRating";
 
 // Configura el ícono de Leaflet manualmente
 delete L.Icon.Default.prototype._getIconUrl;
