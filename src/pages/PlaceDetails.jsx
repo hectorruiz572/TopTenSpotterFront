@@ -13,6 +13,7 @@ import { useUserContext } from "../providers/UserProvider";
 import perfil from "../assets/perfil.png";
 import { usePopupContext } from "../providers/PopUpProvider";
 import "./PlaceDetails.css"; // Aquí puedes agregar tu archivo de estilo
+import Swal from "sweetalert2";
 
 const PlaceDetails = () => {
   const { placeName } = useParams();
@@ -53,6 +54,13 @@ const PlaceDetails = () => {
 
     await setRatingPlace(place.id, rating);
     setRating(rating);
+    Swal.fire({
+      title: "¡Éxito!",
+      text: "Rating guardado correctamente",
+      icon: "success",
+      confirmButtonColor: "#4caf50",
+      confirmButtonText: "Aceptar",
+    });
   };
 
   const handleComment = async () => {

@@ -19,6 +19,22 @@
   font-weight: bold;
 }
 
+/* Imagen de perfil circular */
+.perfil-image-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.perfil-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #cccccc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 /* Estilo del formulario */
 .perfil-form {
   display: flex;
@@ -56,6 +72,12 @@
   outline: none;
 }
 
+/* Input de archivo */
+.perfil-file-input {
+  padding: 8px;
+  font-size: 1rem;
+}
+
 /* Botón guardar */
 .perfil-save-button {
   padding: 12px;
@@ -71,4 +93,68 @@
 
 .perfil-save-button:hover {
   background-color: #45a049;
+}
+
+/* Vista previa de la imagen seleccionada */
+.perfil-image-preview {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.perfil-preview-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #dddddd;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor para la imagen de perfil */
+.perfil-image-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  /* Centra la imagen horizontalmente */
+  align-items: center;
+  /* Centra la imagen verticalmente */
+  margin-bottom: 20px;
+  /* Espacio abajo */
+}
+
+/* Imagen de perfil circular */
+.perfil-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  cursor: pointer;
+}
+
+/* Botón con cruz */
+.perfil-remove-cross {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: rgba(255, 0, 0, 0.7);
+  /* Fondo rojo semitransparente */
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 20px;
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.perfil-remove-cross:hover {
+  background-color: rgba(255, 0, 0, 0.9);
 }

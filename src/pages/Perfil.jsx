@@ -1,29 +1,27 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getUserById, savePerfil } from "../services/api";
-import { useNavigate } from "react-router-dom";
 import "./Perfil.css";
+import iconoPerfil from "../assets/iconoPerfil.png";
+import Swal from "sweetalert2";
 
 const Perfil = () => {
   const [userData, setUserData] = useState({});
-  const [profileImage, setProfileImage] = useState(null); // Estado para la imagen
-  const navigate = useNavigate();
+  const [profileImage, setProfileImage] = useState(null);
 
-  // Cargar el token y userId desde localStorage
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
+
+  const fileInputRef = useRef(null); // Referencia para el input de tipo file
 
   useEffect(() => {
     if (token && userId) {
       getUserById(userId, token)
         .then((response) => {
           setUserData(response);
-          console.log(userData);
         })
         .catch((error) => {
           console.error("Error fetching user data", error);
         });
-    } else {
-      console.log("No token or user id found");
     }
   }, [token, userId]);
 
@@ -32,30 +30,41 @@ const Perfil = () => {
   };
 
   const handleFileChange = (e) => {
-    const file = e.target.files[0]; // Obtener el archivo seleccionado
+    const file = e.target.files[0];
     if (file) {
-      setProfileImage(file); // Almacenar el archivo en el estado
+      setProfileImage(file); // Guarda el archivo en el estado
     }
+  };
+
+  const handleImageClick = () => {
+    fileInputRef.current.click(); // Simula un clic en el input oculto
+  };
+
+  const handleRemoveImage = () => {
+    setProfileImage(null); // Elimina la imagen seleccionada localmente
+    setUserData({ ...userData, photo: null }); // Opcional: también limpia en los datos de usuario
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Crear un objeto FormData para enviar el archivo junto con los demás datos
     const formData = new FormData();
     formData.append("firstName", userData.firstName);
     formData.append("lastName", userData.lastName);
     formData.append("age", userData.age);
     formData.append("location", userData.location);
     if (profileImage) {
-      formData.append("photo", profileImage); // Añadir la imagen seleccionada
+      formData.append("photo", profileImage);
     }
 
     try {
-      // Aquí debes actualizar el perfil con el FormData
       await savePerfil(formData, userId);
-      navigate("/"); // Redirigir después de guardar
-      window.location.reload();
+      Swal.fire({
+        title: "¡Éxito!",
+        text: "Perfil guardado correctamente",
+        icon: "success",
+        confirmButtonColor: "#4caf50",
+        confirmButtonText: "Aceptar",
+      });
     } catch (error) {
       console.error("Error al guardar el perfil", error);
     }
@@ -64,6 +73,43 @@ const Perfil = () => {
   return (
     <div className="perfil-container">
       <h3 className="perfil-title">Perfil</h3>
+
+      <div className="perfil-image-wrapper">
+        {/* Imagen de perfil */}
+        <img
+          src={
+            profileImage
+              ? URL.createObjectURL(profileImage) // Vista previa
+              : userData.photo
+              ? `https://toptenspotterbackend.onrender.com/uploads/profileimg/${userData.photo}`
+              : iconoPerfil // Imagen por defecto
+          }
+          alt="Foto de perfil"
+          className="perfil-image"
+          onClick={handleImageClick} // Click para cambiar imagen
+        />
+
+        {/* Botón con cruz para eliminar */}
+        {(profileImage || userData.photo) && (
+          <button
+            type="button"
+            className="perfil-remove-cross"
+            onClick={handleRemoveImage}
+          >
+            &times;
+          </button>
+        )}
+      </div>
+
+      {/* Input file oculto */}
+      <input
+        type="file"
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        accept="image/*"
+        onChange={handleFileChange}
+      />
+
       <form className="perfil-form" onSubmit={handleSubmit}>
         <div className="perfil-input-group">
           <label className="perfil-label">Usuario</label>
@@ -113,26 +159,6 @@ const Perfil = () => {
             onChange={(e) => handleInputChange("location", e.target.value)}
           />
         </div>
-
-        <div className="perfil-input-group">
-          <label className="perfil-label">Foto de Perfil</label>
-          <input
-            type="file"
-            accept="image/*" // Limitar a imágenes
-            onChange={handleFileChange} // Manejar el cambio de archivo
-            className="perfil-file-input"
-          />
-        </div>
-
-        {profileImage && (
-          <div className="perfil-image-preview">
-            <img
-              src={URL.createObjectURL(profileImage)} // Mostrar vista previa de la imagen seleccionada
-              alt="Vista previa de la foto de perfil"
-              className="perfil-preview-image"
-            />
-          </div>
-        )}
 
         <button type="submit" className="perfil-save-button">
           Guardar

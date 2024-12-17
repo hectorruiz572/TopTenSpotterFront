@@ -205,6 +205,21 @@ const Layout = () => {
                 </button>
               </div>
             </form>
+            {formType === "login" && (
+              <div className="register-link">
+                <p>
+                  ¿No tienes cuenta?{" "}
+                  <span
+                    style={{ color: "blue", cursor: "pointer" }}
+                    onClick={() => {
+                      triggerPopup("register");
+                    }}
+                  >
+                    Regístrate aquí
+                  </span>
+                </p>
+              </div>
+            )}
           </div>
         </div>
       )}
