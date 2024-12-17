@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { getUserById, savePerfil } from "../services/api";
 import "./Perfil.css";
-import iconoPerfil from "../assets/iconoPerfil.png";
 import Swal from "sweetalert2";
+import iconoPerfil from "../assets/iconoPerfil.png";
 
 const Perfil = () => {
   const [userData, setUserData] = useState({});
