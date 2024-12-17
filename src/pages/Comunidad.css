@@ -1,9 +1,9 @@
+@import url("https://unpkg.com/leaflet@1.9.4/dist/leaflet.css");
+
 body {
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-  /* Tipografía más moderna */
+  font-family: "Roboto", sans-serif;
   background-color: #f7fafc;
-  /* Color de fondo más suave */
 }
 
 .comunidad-container {
@@ -13,7 +13,6 @@ body {
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  /* Sombra más suave */
 }
 
 .comunidad-title {
@@ -22,7 +21,6 @@ body {
   text-align: center;
   margin-bottom: 30px;
   font-weight: 800;
-  /* Peso de fuente más pesado */
 }
 
 .comunidad-nav {
@@ -45,11 +43,7 @@ body {
   font-weight: 600;
 }
 
-.comunidad-btn.active {
-  background-color: #3182ce;
-  color: #ffffff;
-}
-
+.comunidad-btn.active,
 .comunidad-btn:hover {
   background-color: #3182ce;
   color: #ffffff;
@@ -74,20 +68,14 @@ body {
 .place-card:hover {
   transform: translateY(-10px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-  /* Efecto de sombra más pronunciado */
 }
 
 .place-image {
   width: 100%;
-  /* Se ajusta al ancho del contenedor */
   aspect-ratio: 16 / 9;
-  /* Define una proporción fija para todas las imágenes */
   object-fit: cover;
-  /* Recorta la imagen para llenar el espacio */
   border-radius: 10px 10px 0 0;
-  /* Mantiene bordes redondeados */
   display: block;
-  /* Asegura un comportamiento predecible */
 }
 
 .place-content {
@@ -114,40 +102,6 @@ body {
   color: #4a5568;
 }
 
-@media (max-width: 768px) {
-  .comunidad-container {
-    padding: 20px;
-  }
-
-  .comunidad-title {
-    font-size: 2.5rem;
-  }
-
-  .comunidad-btn {
-    padding: 10px 20px;
-    font-size: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .comunidad-container {
-    padding: 15px;
-  }
-
-  .comunidad-title {
-    font-size: 2rem;
-  }
-
-  .comunidad-nav {
-    flex-direction: column;
-  }
-
-  .comunidad-btn {
-    width: 100%;
-  }
-}
-
-/* Estilos para el mapa */
 .place-map-container {
   width: 100%;
   height: 400px;

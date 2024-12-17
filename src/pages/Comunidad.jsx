@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import L from "leaflet";
+import "leaflet/dist/leaflet.css"; // Importa estilos de Leaflet
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
 import {
   getAutonomyByName,
   getPlacesByAutonomyAndCategory,
 } from "../services/api";
 import StarRating from "../components/StarRating";
 import "./Comunidad.css";
-import "leaflet/dist/leaflet.css";
+
+// Configura el ícono de Leaflet manualmente
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+});
 
 const CATEGORIES = [
   "Comida",
@@ -117,34 +127,30 @@ const Comunidad = () => {
     if (!places.length || selectedButton === "Comida") return null;
 
     return (
-      <div
-        className="place-map-container"
-        style={{ height: "400px", width: "100%" }}
-      >
+      <div className="place-map-container">
         <MapContainer
           center={[
             comunidadData.latitude || DEFAULT_COORDINATES.latitude,
             comunidadData.longitude || DEFAULT_COORDINATES.longitude,
           ]}
           zoom={7}
-          style={{ width: "100%", height: "100%", borderRadius: "8px" }}
+          style={{ width: "100%", height: "100%" }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {places.map((place, index) => {
-            if (!place.latitude || !place.longitude) return null;
-
-            return (
-              <Marker key={index} position={[place.latitude, place.longitude]}>
-                <Popup>
-                  <div className="map-marker-popup">
-                    <div>
-                      <strong>{place.placeName}</strong>
-                    </div>
-                  </div>
-                </Popup>
-              </Marker>
-            );
-          })}
+          {places.map(
+            (place, index) =>
+              place.latitude &&
+              place.longitude && (
+                <Marker
+                  key={index}
+                  position={[place.latitude, place.longitude]}
+                >
+                  <Popup>
+                    <strong>{place.placeName}</strong>
+                  </Popup>
+                </Marker>
+              )
+          )}
         </MapContainer>
       </div>
     );
@@ -169,7 +175,6 @@ const Comunidad = () => {
       </nav>
 
       <div className="places-grid">{renderPlaceCards()}</div>
-
       {renderMap()}
     </div>
   );
